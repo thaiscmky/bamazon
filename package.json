@@ -4,7 +4,12 @@
   "description": "Buy and add items to Bamazon",
   "main": "bamazon.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "scripts/setup/install.js"
+  },
+  "dependencies" : {
+    "inquirer": "~5.2.*",
+    "mysql": "~2.15.*",
+    "dotenv": "~5.*"
   },
   "repository": {
     "type": "git",
