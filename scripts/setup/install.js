@@ -17,7 +17,6 @@ db.createTable(
         department_id: ['INT', 'AUTO_INCREMENT', 'PRIMARY KEY'],
         department_name: ['VARCHAR(100)', 'NOT NULL'],
         over_head_costs: ['DECIMAL(10,2)', 'DEFAULT 0'],
-        product_sales: ['DECIMAL(10,2)', 'DEFAULT 0'],
-        stock_quantity: ['INT', 'DEFAULT 1']
+        product_sales: ['DECIMAL(10,2)', 'DEFAULT 0']
     }
 );
