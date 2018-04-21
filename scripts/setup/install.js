@@ -27,3 +27,4 @@ db.installSchema(
 console.log('Adding sample data...');
 db.import(__dirname + '/data/initialprods.csv', 'products');
 db.import(__dirname + '/data/initialdepartments.csv', 'departments');
+process.exit();
