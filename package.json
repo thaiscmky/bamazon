@@ -4,9 +4,9 @@
   "description": "Buy and add items to Bamazon",
   "main": "bamazon.js",
   "scripts": {
-    "install": "scripts/setup/install.js"
+    "install": "node ./scripts/setup/install.js"
   },
-  "dependencies" : {
+  "dependencies": {
     "inquirer": "~5.2.*",
     "mysql": "~2.15.*",
     "dotenv": "~5.*",
