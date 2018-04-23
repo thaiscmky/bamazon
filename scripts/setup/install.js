@@ -1,7 +1,7 @@
 var Database = require(__dirname + '/database.js');
 
 var db = new Database();
-console.log('Creating database schema...');
+console.log('Creating database schema...When both tables are created, press Ctrl+C to restart the program.');
 db.installSchema(
     [{
         name: 'products',
@@ -27,4 +27,3 @@ db.installSchema(
 console.log('Adding sample data...');
 db.import(__dirname + '/data/initialprods.csv', 'products');
 db.import(__dirname + '/data/initialdepartments.csv', 'departments');
-process.exit();
