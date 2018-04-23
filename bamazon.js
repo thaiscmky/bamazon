@@ -1,22 +1,25 @@
-var inquirer = require("inquirer");
+var Customer = require("./model/bamazonCustomer.js");
 var userInput = process.argv;
 userInput.splice(0,2);
-
+var customer = new Customer();
 
 startapp();
 function startapp() {
-
-    // We create a list prompt. Specifying that the user must pick a random number between 1 and 5.
     console.log('Welcome to BAmazon, the next best thing in shopping via shell!');
-    inquirer.prompt([
-        {
-            type: "list",
-            name: "userGuess",
-            message: "Try to stay alive! Guess a number between [1-5]",
-            choices: ["1", "2", "3", "4", "5"]
-        }
-
-    ]).then(function(guess) {
-
-    });
+    customer.promptUser(customer.options.initAction[0].prompt, customer.options.initAction[0].callback);
 }
+
+global.customer.chooseAction = function(answer){
+    var msg = Object.values(answer)[0];
+    switch(msg.split(' ')[0].toLowerCase()){
+        case 'view':
+            //display all products
+            break;
+        case 'buy':
+            //start buying process
+            break;
+        case 'exit':
+            //exit application process
+            break;
+    }
+};

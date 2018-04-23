@@ -1,10 +1,11 @@
 require("dotenv").config();
 var mysql = require("mysql");
-var Role = function(){};
+var Role = function(role){
+  this.role = role;
+};
 
 Role.prototype = {
-    role: null,
-    options: [],
+    options: {},
     inquirer: require("inquirer"),
     connection: mysql.createConnection({
         host: process.env.DB_HOST,
@@ -17,19 +18,27 @@ Role.prototype = {
         return this.options;
     },
     addOption: function(id, args, callback){
-        var promptObj = {
-            name: args.name,
-            type: args.type,
-            message: args.message
-        };
-        if(args.validate) promptObj.validate = args.validate;
-        if(args.choices) promptObj.choices = args.choices;
-        this.options.push( {id: { prompt: promptObj, callback: callback} });
+      var option = {};
+      var promptObj = {
+          name: args.name,
+          type: args.type,
+          message: args.message
+      };
+      if(args.validate) promptObj.validate = args.validate;
+      if(args.choices) promptObj.choices = args.choices;
+      var promptobj = { prompt: promptObj, callback: callback };
+      if(this.options[id]){
+          this.options[id].push(promptobj);
+      } else {
+          option[id] = [promptobj];
+          this.options =  Object.assign(this.options, option);
+      }
     },
     promptUser: function(questions, callback){
+        var self = this;
         this.inquirer.prompt(questions)
             .then(function(answer) {
-                callback.call(this);
+                global[self.role][callback](answer);
             });
     }
 };

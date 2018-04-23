@@ -1,13 +1,16 @@
 var Role = require("./bamazonRole");
 
-var Customer = new Role();
-Customer.prototype.role = 'customer';
+var Customer = function(){
+    Role.call(this, 'customer');
+    global.customer = {};
+};
+Customer.prototype = Role.prototype;
 Customer.prototype.cartitem = {};
 Customer.prototype.addOption(
     'initAction',
     {
         name: "init",
-        type: "rawlist",
+        type: "list",
         choices: [
             'View Products for Sale',
             'Buy a Product',
@@ -62,3 +65,5 @@ Customer.prototype.getQuantity = function(qty){
 Customer.prototype.processPurchase = function(){
 
 };
+
+module.exports = Customer;
