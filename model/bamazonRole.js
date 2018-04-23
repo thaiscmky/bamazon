@@ -1,6 +1,6 @@
 require("dotenv").config();
 var mysql = require("mysql");
-var Role = {};
+var Role = function(){};
 
 Role.prototype.inquirer = require("inquirer");
 Role.prototype.connection = mysql.createConnection({
