@@ -14,5 +14,6 @@ That the database schema and sample data be installed with the following command
 node install
 ```
 
-#Demonstration
+# Demonstration
+
 <img src='https://github.com/thaiscmky/bamazon/blob/master/demo.gif'/>
