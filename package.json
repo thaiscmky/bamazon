@@ -10,7 +10,8 @@
     "inquirer": "~5.2.*",
     "mysql": "~2.15.*",
     "dotenv": "~5.*",
-    "csv-parse": "~2.2"
+    "csv-parse": "~2.2",
+    "cli-table": "~0.3.1"
   },
   "repository": {
     "type": "git",

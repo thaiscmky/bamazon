@@ -1,11 +1,13 @@
 require("dotenv").config();
 var mysql = require("mysql");
+var Table = require("cli-table");
 var Role = function(role){
   this.role = role;
 };
 
 Role.prototype = {
     options: {},
+    inventory: [],
     inquirer: require("inquirer"),
     connection: mysql.createConnection({
         host: process.env.DB_HOST,
@@ -34,12 +36,25 @@ Role.prototype = {
           this.options =  Object.assign(this.options, option);
       }
     },
-    promptUser: function(questions, callback){
-        var self = this;
+    promptUser: function(user, questions, callback){ //check why you can't use this.role instead...becomes undefined by the next prompt
         this.inquirer.prompt(questions)
-            .then(function(answer) {
-                global[self.role][callback](answer);
-            });
+        .then(function(answer) {
+            global[user+'Action'][callback](answer);
+        }).then(Promise.resolve());
+    },
+    showTable: function(header, rows){
+        var table = new Table({
+            head: header,
+            chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
+                , 'bottom': '═' , 'bottom-mid': '╧' , 'bottom-left': '╚' , 'bottom-right': '╝'
+                , 'left': '║' , 'left-mid': '╟' , 'mid': '─' , 'mid-mid': '┼'
+                , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
+        });
+        rows.forEach(function(row){
+            Role.prototype.inventory.push(Object.values(row));
+            table.push(Object.values(row));
+        });
+        console.log(table.toString());
     }
 };
 module.exports = Role;
